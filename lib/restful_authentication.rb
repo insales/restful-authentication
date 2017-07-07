@@ -1,0 +1,8 @@
+require 'authentication'
+require 'authentication/by_password'
+require 'authentication/by_cookie_token'
+require 'authorization'
+require 'authorization/aasm_roles'
+require 'authorization/stateful_roles'
+require 'trustification'
+require 'trustification/email_validation'
