@@ -112,7 +112,7 @@ module AuthenticatedSystem
         self.current_<%= file_name %> = <%= class_name %>.authenticate(login, password)
       end
     end
-    
+
     #
     # Logout
     #
@@ -147,7 +147,7 @@ module AuthenticatedSystem
       logout_keeping_session!
       reset_session
     end
-    
+
     #
     # Remember_me Tokens
     #
@@ -159,25 +159,25 @@ module AuthenticatedSystem
 
     def valid_remember_cookie?
       return nil unless @current_<%= file_name %>
-      (@current_<%= file_name %>.remember_token?) && 
+      (@current_<%= file_name %>.remember_token?) &&
         (cookies[:auth_token] == @current_<%= file_name %>.remember_token)
     end
-    
+
     # Refresh the cookie auth token if it exists, create it otherwise
     def handle_remember_cookie! new_cookie_flag
       return unless @current_<%= file_name %>
       case
       when valid_remember_cookie? then @current_<%= file_name %>.refresh_token # keeping same expiry date
-      when new_cookie_flag        then @current_<%= file_name %>.remember_me 
+      when new_cookie_flag        then @current_<%= file_name %>.remember_me
       else                             @current_<%= file_name %>.forget_me
       end
       send_remember_cookie!
     end
-  
+
     def kill_remember_cookie!
       cookies.delete :auth_token
     end
-    
+
     def send_remember_cookie!
       cookies[:auth_token] = {
         :value   => @current_<%= file_name %>.remember_token,
